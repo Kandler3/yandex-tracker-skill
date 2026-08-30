@@ -103,9 +103,7 @@ Other properties: **Mutating requests can change shared Tracker data and trigger
 
 ## Skill Version
 
-**Unreleased — `feat/skill-structure-and-docs`, based on package metadata version `1.0.1`.**
-
-Replace this value with the release tag or signing identifier before publication.
+**Version `1.1.0` — unreleased, prepared on `feat/skill-structure-and-docs`.**
 
 ## Release Evidence
 
