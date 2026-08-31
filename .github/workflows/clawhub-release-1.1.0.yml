@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      CLAWHUB_CONFIG_PATH: ${{ runner.temp }}/clawhub-config.json
       RELEASE_CHANGELOG: Split detailed guidance into focused references, restore prerequisites and setup documentation, add a skill card, and license the repository under MIT.
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +44,8 @@ jobs:
           import os
           from pathlib import Path
 
-          Path(os.environ["CLAWHUB_CONFIG_PATH"]).write_text(
+          config_path = Path(os.environ["RUNNER_TEMP"]) / "clawhub-config.json"
+          config_path.write_text(
               json.dumps(
                   {
                       "registry": "https://clawhub.ai",
@@ -56,6 +56,7 @@ jobs:
               encoding="utf-8",
           )
           PY
+          echo "CLAWHUB_CONFIG_PATH=$RUNNER_TEMP/clawhub-config.json" >> "$GITHUB_ENV"
 
       - name: Preview release
         run: |
