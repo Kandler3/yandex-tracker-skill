@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "yandex-tracker",
+  "version": "1.1.0",
+  "description": "Manage Yandex Tracker issues, queues, comments, attachments, links, worklogs, searches, and bulk changes.",
+  "author": {
+    "name": "Artem Kovalchuk"
+  },
+  "homepage": "https://github.com/Kandler3/yandex-tracker-skill",
+  "repository": "https://github.com/Kandler3/yandex-tracker-skill",
+  "license": "MIT",
+  "keywords": [
+    "yandex-tracker",
+    "issue-tracking",
+    "project-management"
+  ],
+  "skills": [
+    "./"
+  ]
+}

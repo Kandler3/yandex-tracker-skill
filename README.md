@@ -10,6 +10,26 @@ It supports:
 - queues, users, boards, and sprints;
 - bulk updates, transitions, and queue moves.
 
+## Installation
+
+Install the skill from its public GitHub repository with the Vercel Agent Skills CLI:
+
+```bash
+npx skills add Kandler3/yandex-tracker-skill
+```
+
+The installer detects supported agents and lets you choose the target. You can also select an agent non-interactively, for example:
+
+```bash
+npx skills add Kandler3/yandex-tracker-skill --skill yandex-tracker --agent codex
+```
+
+OpenClaw users can install the published package from ClawHub:
+
+```bash
+clawhub install yandex-tracker
+```
+
 ## Prerequisites
 
 - An agent runtime that can read filesystem-based skills and execute Python 3.

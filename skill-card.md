@@ -4,7 +4,7 @@
 
 Yandex Tracker reads and manages issues, queues, comments, attachments, links, worklogs, planning data, and bulk changes for authorized Yandex Tracker users.
 
-This unreleased feature-branch version is intended for review and controlled testing. Production use should follow organization-specific security, permission, evaluation, and release review.
+Version 1.1.0 is publicly released. Production use should still follow organization-specific security, permission, evaluation, and release review.
 
 ## Owner
 
@@ -86,7 +86,7 @@ Keep credentials in the runtime's secret or environment mechanism. Do not includ
 
 ## References
 
-- [Source repository](https://github.com/Kandler3/yandex-tracker-openclaw-skill)
+- [Source repository](https://github.com/Kandler3/yandex-tracker-skill)
 - [`yandex_tracker_client` package](https://pypi.org/project/yandex-tracker-client/)
 - [Anthropic skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 - [NVIDIA skill card guidance](https://docs.nvidia.com/skills/skill-cards)
@@ -103,14 +103,15 @@ Other properties: **Mutating requests can change shared Tracker data and trigger
 
 ## Skill Version
 
-**Version `1.1.0` — unreleased, prepared on `feat/skill-structure-and-docs`.**
+**Version `1.1.0` — released on August 31, 2026.**
 
 ## Release Evidence
 
-- Source branch: `feat/skill-structure-and-docs`
+- Source branch: `main`
 - Skill structure validation: `Skill is valid!` from `quick_validate.py`
 - SkillEvaluator / SkillSpector report: not yet generated
 - Evaluation dataset and benchmark report: not yet generated
+- ClawHub release: `yandex-tracker@1.1.0`
 - Release tag and OMS signature: not yet created
 
 ## Ethical Considerations
