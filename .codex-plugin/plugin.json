@@ -1,0 +1,36 @@
+{
+  "name": "yandex-tracker",
+  "version": "1.1.0",
+  "description": "Manage Yandex Tracker issues, queues, comments, attachments, links, worklogs, searches, and bulk changes.",
+  "author": {
+    "name": "Artem Kovalchuk",
+    "url": "https://github.com/Kandler3"
+  },
+  "homepage": "https://github.com/Kandler3/yandex-tracker-skill",
+  "repository": "https://github.com/Kandler3/yandex-tracker-skill",
+  "license": "MIT",
+  "keywords": [
+    "yandex-tracker",
+    "issue-tracking",
+    "project-management",
+    "python"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Yandex Tracker",
+    "shortDescription": "Manage issues and projects in Yandex Tracker",
+    "longDescription": "Use Yandex Tracker through a guarded workflow for issues, queues, comments, attachments, links, worklogs, searches, planning data, and bulk changes.",
+    "developerName": "Artem Kovalchuk",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/Kandler3/yandex-tracker-skill",
+    "defaultPrompt": [
+      "Show my open Yandex Tracker issues.",
+      "Create a Yandex Tracker issue after confirming its queue and fields.",
+      "Summarize open Yandex Tracker issues by assignee."
+    ]
+  }
+}

@@ -108,11 +108,15 @@ Other properties: **Mutating requests can change shared Tracker data and trigger
 ## Release Evidence
 
 - Source branch: `main`
+- Release: [`v1.1.0`](https://github.com/Kandler3/yandex-tracker-skill/releases/tag/v1.1.0)
+- Agent Skills validation: `Valid skill` from `agentskills validate`
 - Skill structure validation: `Skill is valid!` from `quick_validate.py`
+- Claude Code plugin validation: `Validation passed` from `claude plugin validate . --strict`
+- Gemini CLI extension validation: `Extension . has been successfully validated.`
 - SkillEvaluator / SkillSpector report: not yet generated
 - Evaluation dataset and benchmark report: not yet generated
 - ClawHub release: `yandex-tracker@1.1.0`
-- Release tag and OMS signature: not yet created
+- OMS signature: not yet created
 
 ## Ethical Considerations
 

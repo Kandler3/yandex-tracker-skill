@@ -1,0 +1,5 @@
+{
+  "name": "yandex-tracker",
+  "version": "1.1.0",
+  "description": "Manage Yandex Tracker issues, queues, comments, attachments, links, worklogs, searches, and bulk changes."
+}
