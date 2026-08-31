@@ -4,7 +4,6 @@
 [![skills.sh — Install](https://img.shields.io/badge/skills.sh-Install-000000)](https://www.skills.sh/kandler3/yandex-tracker-skill/yandex-tracker)
 [![Claude Code — Package](https://img.shields.io/badge/Claude_Code-Package-D97757)](https://github.com/Kandler3/yandex-tracker-agent-plugin/releases/tag/v1.1.0)
 [![Gemini CLI — Package](https://img.shields.io/badge/Gemini_CLI-Package-4285F4)](https://github.com/Kandler3/yandex-tracker-agent-plugin)
-[![GitHub Copilot — In review](https://img.shields.io/badge/GitHub_Copilot-In_review-8957E5)](https://github.com/github/awesome-copilot/issues/2883)
 [![Codex — Package](https://img.shields.io/badge/Codex-Package-10A37F)](https://github.com/Kandler3/yandex-tracker-agent-plugin/releases/tag/v1.1.0)
 
 A skill for working with [Yandex Tracker](https://tracker.yandex.ru) through the Python `yandex_tracker_client` package.
