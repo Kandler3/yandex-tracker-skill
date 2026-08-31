@@ -1,5 +1,6 @@
 name: Publish ClawHub 1.1.0
 
+# One-time release workflow; remove it after a successful publication.
 on:
   push:
     branches:
