@@ -2,19 +2,6 @@
 name: yandex-tracker
 description: Manages Yandex Tracker issues, queues, comments, attachments, links, worklogs, searches, and bulk changes through the Python yandex_tracker_client. Use when a user asks to read, create, update, transition, organize, or report on Yandex Tracker data.
 license: MIT
-metadata:
-  openclaw:
-    emoji: "📋"
-    requires:
-      bins: ["python3"]
-      env: ["TRACKER_TOKEN"]
-      envOneOf: ["TRACKER_ORG_ID", "TRACKER_CLOUD_ORG_ID"]
-    install:
-      - id: pip-yandex-tracker-client
-        kind: pip
-        package: yandex_tracker_client
-        label: Install yandex_tracker_client (pip)
-        provenance: https://pypi.org/project/yandex-tracker-client/
 ---
 
 # Yandex Tracker
