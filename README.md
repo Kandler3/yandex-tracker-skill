@@ -1,96 +1,160 @@
-# Yandex Tracker agent skill
+# Яндекс Трекер с ИИ — Yandex Tracker Skill
 
-[![ClawHub — Install](https://img.shields.io/badge/ClawHub-Install-111827)](https://clawhub.ai/kandler3/skills/yandex-tracker)
-[![skills.sh — Install](https://img.shields.io/badge/skills.sh-Install-000000)](https://www.skills.sh/kandler3/yandex-tracker-skill/yandex-tracker)
-[![Claude Code — Package](https://img.shields.io/badge/Claude_Code-Package-D97757)](https://github.com/Kandler3/yandex-tracker-skill/releases/tag/v1.1.0)
-[![Gemini CLI — Package](https://img.shields.io/badge/Gemini_CLI-Package-4285F4)](https://github.com/Kandler3/yandex-tracker-skill)
-[![Codex — Package](https://img.shields.io/badge/Codex-Package-10A37F)](https://github.com/Kandler3/yandex-tracker-skill/releases/tag/v1.1.0)
+**Русский** | [English](README.en.md)
 
-A skill for working with [Yandex Tracker](https://tracker.yandex.ru) through the Python `yandex_tracker_client` package.
+[![ClawHub — установить](https://img.shields.io/badge/ClawHub-Install-111827)](https://clawhub.ai/kandler3/skills/yandex-tracker)
+[![skills.sh — установить](https://img.shields.io/badge/skills.sh-Install-000000)](https://www.skills.sh/kandler3/yandex-tracker-skill/yandex-tracker)
+[![Claude Code — пакет](https://img.shields.io/badge/Claude_Code-Package-D97757)](https://github.com/Kandler3/yandex-tracker-skill/releases/tag/v1.1.0)
+[![Gemini CLI — пакет](https://img.shields.io/badge/Gemini_CLI-Package-4285F4)](https://github.com/Kandler3/yandex-tracker-skill)
+[![Codex — пакет](https://img.shields.io/badge/Codex-Package-10A37F)](https://github.com/Kandler3/yandex-tracker-skill/releases/tag/v1.1.0)
 
-It supports:
+**Yandex Tracker Skill** — скилл для работы с [Яндекс Трекером](https://tracker.yandex.ru) через ИИ-агентов. Он помогает искать и создавать задачи, менять статусы, работать с комментариями и готовить отчёты по запросу на обычном языке.
 
-- reading, creating, updating, and transitioning issues;
-- Tracker Query Language and structured searches;
-- custom fields, comments, attachments, links, and worklogs;
-- queues, users, boards, and sprints;
-- bulk updates, transitions, and queue moves.
+Скилл содержит инструкции для агента, который выполняет запросы к API Трекера через Python-пакет [`yandex_tracker_client`](https://pypi.org/project/yandex-tracker-client/). В репозитории есть манифесты для Claude Code, Codex и Gemini CLI; для OpenClaw пакет опубликован в ClawHub.
 
-## Installation
+Например, после подключения можно попросить:
 
-Install the skill from its public GitHub repository with the Vercel Agent Skills CLI:
+> Найди открытые задачи в очереди DEV, сгруппируй их по исполнителям и подготовь краткую сводку.
+
+`DEV` и другие ключи в примерах нужно заменить на ключи ваших очередей и задач.
+
+## Возможности
+
+- Поиск задач с помощью языка запросов Трекера (Tracker Query Language) и фильтров, группировка результатов и подготовка сводок.
+- Чтение, создание и редактирование задач, изменение статусов.
+- Работа с пользовательскими полями, комментариями, вложениями и связями между задачами.
+- Работа с записями о затраченном времени, очередями, пользователями, досками и спринтами.
+- Массовое обновление задач, изменение статусов и перенос между очередями в согласованном пользователем объёме.
+
+## Как подключить Яндекс Трекер к ИИ
+
+### 1. Проверьте требования
+
+Вам понадобятся:
+
+- ИИ-агент, который умеет читать скиллы из файловой системы и запускать Python 3.
+- Доступ из среды агента к API Яндекс Трекера.
+- Аккаунт Яндекса с доступом к нужной организации и очередям Трекера.
+- OAuth-токен с необходимыми разрешениями Трекера и идентификатор организации Яндекс 360 или Yandex Cloud.
+- Node.js и npm с командой `npx`, если вы устанавливаете скилл через Agent Skills CLI.
+
+### 2. Установите скилл
+
+Установите скилл из этого репозитория через Vercel Agent Skills CLI:
 
 ```bash
 npx skills add Kandler3/yandex-tracker-skill
 ```
 
-The installer detects supported agents and lets you choose the target. You can also select an agent non-interactively, for example:
+Установщик определит поддерживаемых агентов и предложит выбрать, куда установить скилл. Агента можно указать явно, например для Codex:
 
 ```bash
 npx skills add Kandler3/yandex-tracker-skill --skill yandex-tracker --agent codex
 ```
 
-OpenClaw users can install the published package from ClawHub:
+Для OpenClaw используйте опубликованный пакет ClawHub:
 
 ```bash
 clawhub install yandex-tracker
 ```
 
-## Prerequisites
-
-- An agent runtime that can read filesystem-based skills and execute Python 3.
-- A Yandex account with access to the required Tracker organization and queues.
-- A least-privilege OAuth token with the Tracker scope.
-- The Yandex 360 or Yandex Cloud organization ID.
-
-Install [`yandex_tracker_client`](https://pypi.org/project/yandex-tracker-client/) when the runtime does not manage dependencies automatically:
+Если среда агента не устанавливает Python-зависимости автоматически, установите клиент в ту среду Python, которую использует агент:
 
 ```bash
 python -m pip install yandex_tracker_client
 ```
 
-## Setup
+### 3. Получите токен
 
-### 1. Get a Yandex OAuth token
+Следуйте [официальной инструкции Яндекс Трекера по доступу к API](https://yandex.ru/support/tracker/ru/api/access), чтобы создать OAuth-приложение и получить токен.
 
-Create a token at [oauth.yandex.ru](https://oauth.yandex.ru) with only the permissions needed for Tracker. Avoid broad administrative tokens.
+Выберите разрешения под свои задачи: `tracker:read` для чтения данных, `tracker:write` для их изменения. Токен не даёт дополнительных прав в Трекере: действия выполняются с правами аккаунта, которому он принадлежит.
 
-### 2. Find the organization ID
+### 4. Узнайте идентификатор организации
 
-- **Yandex 360:** open Tracker settings, select the organization, and copy its numeric ID.
-- **Yandex Cloud:** copy the string organization ID from Yandex Cloud Organization Manager.
+В Трекере откройте **Администрирование → Организации** и скопируйте идентификатор:
 
-### 3. Configure credentials
+- **Яндекс 360:** числовой идентификатор, для него используется `TRACKER_ORG_ID`.
+- **Yandex Cloud:** строковый идентификатор, для него используется `TRACKER_CLOUD_ORG_ID`.
 
-Store the token and organization ID in the secret or environment mechanism provided by the agent runtime:
+### 5. Настройте доступ для агента
+
+Передайте значения через механизм секретов или переменные окружения вашей среды агента. Для организации Яндекс 360 нужны:
 
 ```text
 TRACKER_TOKEN=your_oauth_token
 TRACKER_ORG_ID=12345678
 ```
 
-For a Yandex Cloud organization, set `TRACKER_CLOUD_ORG_ID` instead of `TRACKER_ORG_ID`. Set exactly one organization ID variable.
+Для организации Yandex Cloud:
 
-Do not put tokens in prompts, generated scripts, or repository files. OpenClaw users can follow the additional [OpenClaw configuration](skills/yandex-tracker/references/openclaw.md).
+```text
+TRACKER_TOKEN=your_oauth_token
+TRACKER_CLOUD_ORG_ID=your_cloud_org_id
+```
 
-## Structure
+Значения в примерах — заглушки. Укажите **ровно одну** переменную идентификатора организации: `TRACKER_ORG_ID` или `TRACKER_CLOUD_ORG_ID`.
 
-[`skills/yandex-tracker/SKILL.md`](skills/yandex-tracker/SKILL.md) contains the shared workflow, safety constraints, and a topic index. Detailed instructions live beside it in `references/`, so an agent loads only the material relevant to the current request. Platform manifests remain at the repository root and all point to this single skill source.
+Не вставляйте токены в запросы к ИИ, сгенерированные скрипты или файлы репозитория. Для OpenClaw есть [отдельная инструкция по настройке](skills/yandex-tracker/references/openclaw.md). Подробности подключения, включая вариант с временным IAM-токеном для Yandex Cloud, описаны в [справочнике по настройке и авторизации](skills/yandex-tracker/references/setup-and-auth.md).
 
-See the [skill card](skill-card.md) for ownership, intended use, dependencies, known risks, outputs, and release evidence.
+### 6. Проверьте подключение
 
-## License
+Попросите агента выполнить запрос на чтение:
 
-This project is available under the [MIT License](LICENSE).
+> Используй скилл yandex-tracker и покажи список доступных мне очередей Яндекс Трекера.
 
-## Example requests
+При успешном подключении агент вернёт список очередей. Затем можно выбрать нужную очередь и запросить задачи или сводку по ним.
 
-> Show all issues assigned to me in queue DEV.
+Если подключение не получилось, проверьте, что агент видит скилл, запускает нужную среду Python с установленным клиентом и получает токен вместе с одним идентификатором организации. Дополнительные сведения — в [справочнике по настройке и авторизации](skills/yandex-tracker/references/setup-and-auth.md).
 
-> Create a critical task in BACKEND titled "Migrate auth to OAuth 2.0".
+## Примеры запросов к ИИ
 
-> Close DEV-42 with the comment "Fixed in v3.1" and the `fixed` resolution.
+### Найти свои задачи
 
-> Group open issues by assignee and summarize the totals.
+> Покажи все задачи в очереди DEV, назначенные на меня.
 
-The agent should execute the required API calls, aggregate related results, and return a concise confirmation or report.
+### Создать задачу
+
+> Создай в очереди BACKEND задачу «Перевести авторизацию на OAuth 2.0» с критическим приоритетом.
+
+### Изменить статус и добавить комментарий
+
+> Закрой задачу DEV-42 с резолюцией fixed и комментарием «Исправлено в версии 3.1».
+
+### Подготовить отчёт
+
+> Сгруппируй открытые задачи очереди DEV по исполнителям и покажи количество задач у каждого.
+
+### Подготовить массовое изменение
+
+> Найди открытые задачи очереди DEV без исполнителя и покажи список для проверки перед массовым назначением.
+
+Агент должен учитывать поля и переходы статусов, доступные в конкретной очереди. После изменения он сообщает ключи затронутых задач и подтверждённый результат. Перед массовой операцией проверяет набор задач и согласованный объём изменений.
+
+## Частые вопросы
+
+### Что такое скилл для Яндекс Трекера?
+
+Это набор инструкций и справочных материалов, которые ИИ-агент использует для работы с API Трекера. Пользователь описывает задачу обычным языком, а агент обращается к Python-клиенту, обрабатывает данные и возвращает результат.
+
+### Нужен ли отдельный MCP-сервер?
+
+Для описанного здесь способа подключения отдельный MCP-сервер не требуется: агент выполняет Python-код с библиотекой `yandex_tracker_client`. Ему нужны доступ к API, настроенные учётные данные и возможность запускать Python.
+
+### Можно ли использовать скилл только для чтения и отчётов?
+
+Да. Используйте OAuth-токен с разрешением `tracker:read`. Создание и изменение задач требуют соответствующего разрешения токена и прав пользователя в Трекере.
+
+### Поддерживается ли Трекер в организации Yandex Cloud?
+
+Да. Укажите `TRACKER_CLOUD_ORG_ID` вместо `TRACKER_ORG_ID`. Пример выше использует OAuth-токен; настройка временного IAM-токена описана в [справочнике по авторизации](skills/yandex-tracker/references/setup-and-auth.md).
+
+## Структура репозитория
+
+Общие инструкции, ограничения и указатель тем находятся в [`skills/yandex-tracker/SKILL.md`](skills/yandex-tracker/SKILL.md). Подробные справочники лежат рядом в `references/`, чтобы агент мог загружать только материалы по текущему запросу. Манифесты интеграций находятся в корне репозитория и каталогах `.claude-plugin/` и `.codex-plugin/`.
+
+Сведения об авторе, назначении, зависимостях, известных рисках и проверках релиза собраны в [карточке скилла](skill-card.md). Инструкции для агента и карточка скилла доступны на английском языке.
+
+## Лицензия
+
+Проект распространяется под лицензией [MIT](LICENSE).
